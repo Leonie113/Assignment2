@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "TypeScript App",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "rollup -c"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Leonie113/Assignment2.git"
