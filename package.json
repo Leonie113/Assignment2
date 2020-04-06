@@ -1,0 +1,18 @@
+{
+  "name": "typescript-assignment2",
+  "version": "1.0.0",
+  "description": "TypeScript App",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leonie113/Assignment2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leonie113/Assignment2/issues"
+  },
+  "homepage": "https://github.com/Leonie113/Assignment2#readme"
+}
