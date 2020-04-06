@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "TypeScript App",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Leonie113/Assignment2.git"
@@ -14,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/Leonie113/Assignment2/issues"
   },
-  "homepage": "https://github.com/Leonie113/Assignment2#readme"
+  "homepage": "https://github.com/Leonie113/Assignment2#readme",
+  "dependencies": {
+    "typescript": "^3.8.3"
+  }
 }
