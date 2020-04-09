@@ -1,5 +1,6 @@
-import {helloWorld, Beispiel} from './myModule';
+import {helloWorld, Ursprungscode} from './myModule';
 
-console.log(helloWorld);
 
-customElements.define('my-beispiel', Beispiel)
+customElements.define('my-beispiel', Ursprungscode)
+
+let currentActiveCard = 0;
