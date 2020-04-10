@@ -7,7 +7,8 @@ export class Ursprungscode extends HTMLElement{
   
     }
 }
-  alert("Hi");
+
+
 const cardsContainer: HTMLElement | null = document.getElementById('cards-container');
 const prevBtn: HTMLElement | null= document.getElementById('prev');
 const nextBtn: HTMLElement | null= document.getElementById('next');
@@ -19,31 +20,34 @@ const answerEl = document.getElementById('answer');
 const addCardBtn: HTMLElement | null= document.getElementById('add-card');
 const clearBtn: HTMLElement | null= document.getElementById('clear');
 const addContainer: HTMLElement | null= document.getElementById('add-container');
+
 var localStorage : any | null;
-
-
 // Keep track of current card
+
 let currentActiveCard = 0;
-
 // Store DOM cards
-const cardsEl: any = [];
 
+const cardsEl: any = [];
 // Store card data
+
 const cardsData = getCardsData();
+
 
 // Create all cards
 function createCards() {
+
     cardsData.forEach((data: any, index: any) => createCard(data, index));
   }
 
 // Create a single card in DOM
 function createCard(data: any, index: any) {
+
     const card = document.createElement('div');
     card.classList.add('card');
   
-    if (index === 0) {
+    if (index === 0) 
       card.classList.add('active');
-    }
+    
   
     card.innerHTML = `
     <div class="inner-card">
@@ -65,12 +69,14 @@ function createCard(data: any, index: any) {
     // Add to DOM cards
     cardsEl.push(card);
     
-    if(cardsContainer) {
-    cardsContainer.appendChild(card);}
+    if(cardsContainer) 
+      cardsContainer.appendChild(card);
   
     updateCurrentText();
   }
   
+
+
   // Show number of cards
   function updateCurrentText() {
     if(currentEl) {
@@ -79,24 +85,31 @@ function createCard(data: any, index: any) {
   
   // Get cards from local storage
   function getCardsData() {
+
       if(localStorage) {
-    const cards = JSON.parse(localStorage.getItem('cards'));
-    return cards === null ? [] : cards;
+        
+        const cards = JSON.parse(localStorage.getItem('cards'));
+        return cards === null ? [] : cards;
+      }
   }
   
   // Add card to local storage
   function setCardsData(cards: any) {
-    if(localStorage) {
-    localStorage.setItem('cards', JSON.stringify(cards));}
-    window.location.reload();
+      if(localStorage) {
+        localStorage.setItem('cards', JSON.stringify(cards));
+        window.location.reload();
+      }
   }
+
   
   createCards();
 
   // Event listeners
 
 // Next button
+
 if(nextBtn) {
+
     nextBtn.addEventListener('click', () => 
     {
         cardsEl[currentActiveCard].className = 'card left';
@@ -111,7 +124,8 @@ if(nextBtn) {
   
         updateCurrentText();
     }
-    )}
+  )}
+  
   // Prev button
   if(prevBtn) {
   prevBtn.addEventListener('click', () => {
@@ -128,8 +142,10 @@ if(nextBtn) {
     updateCurrentText();
   });
 }
+
   // Show add container
   if(showBtn) {
+    alert("Show");
     showBtn.addEventListener('click', () => {
       if(addContainer) 
         addContainer.classList.add('show');
@@ -183,4 +199,3 @@ if(nextBtn) {
         window.location.reload();
         });
     }
-}
