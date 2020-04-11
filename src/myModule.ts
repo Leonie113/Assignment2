@@ -8,7 +8,6 @@ export class Ursprungscode extends HTMLElement{
     }
 }
 
-
 const cardsContainer: HTMLElement | null = document.getElementById('cards-container');
 const prevBtn: HTMLElement | null= document.getElementById('prev');
 const nextBtn: HTMLElement | null= document.getElementById('next');
@@ -21,15 +20,12 @@ const addCardBtn: HTMLElement | null= document.getElementById('add-card');
 const clearBtn: HTMLElement | null= document.getElementById('clear');
 const addContainer: HTMLElement | null= document.getElementById('add-container');
 
-var localStorage : any | null;
-// Keep track of current card
 
 let currentActiveCard = 0;
 // Store DOM cards
 
 const cardsEl: any = [];
 // Store card data
-
 const cardsData = getCardsData();
 
 
@@ -84,21 +80,18 @@ function createCard(data: any, index: any) {
   }}
   
   // Get cards from local storage
-  function getCardsData() {
+  function getCardsData(): any {
 
-      if(localStorage) {
-        
-        const cards = JSON.parse(localStorage.getItem('cards'));
-        return cards === null ? [] : cards;
-      }
+    const cards : any = localStorage.getItem('cards');
+    return cards === null ? [] : cards;
   }
-  
+
   // Add card to local storage
-  function setCardsData(cards: any) {
-      if(localStorage) {
+  function setCardsData(cards: any):any {
+    
         localStorage.setItem('cards', JSON.stringify(cards));
         window.location.reload();
-      }
+      
   }
 
   
@@ -108,6 +101,7 @@ function createCard(data: any, index: any) {
 
 // Next button
 
+function nextButton() {
 if(nextBtn) {
 
     nextBtn.addEventListener('click', () => 
@@ -125,8 +119,10 @@ if(nextBtn) {
         updateCurrentText();
     }
   )}
-  
+}
+nextButton();
   // Prev button
+  function prevButton () {
   if(prevBtn) {
   prevBtn.addEventListener('click', () => {
     cardsEl[currentActiveCard].className = 'card right';
@@ -142,8 +138,10 @@ if(nextBtn) {
     updateCurrentText();
   });
 }
-
+}
+prevButton();
   // Show add container
+  function showAddContainer () {
   if(showBtn) {
     alert("Show");
     showBtn.addEventListener('click', () => {
@@ -152,15 +150,21 @@ if(nextBtn) {
         
     });
   }
+}
+showAddContainer();
   // Hide add container
+  function hideAddContainer () {
   if(hideBtn) {
   hideBtn.addEventListener('click', () => {
       if(addContainer)
         addContainer.classList.remove('show');
     });
   } 
+}
+hideAddContainer();
   
   // Add new card
+  function addNewCard () {
   if(addCardBtn) {
     addCardBtn.addEventListener('click', () => {
         if(questionEl){
@@ -188,8 +192,11 @@ if(nextBtn) {
             }
         }});
     }
-
+  }
+  addNewCard();
   // Clear cards button
+  
+function clearCards () {
   if(clearBtn){
     clearBtn.addEventListener('click', () => {
         if(localStorage){
@@ -199,3 +206,5 @@ if(nextBtn) {
         window.location.reload();
         });
     }
+  }
+clearCards(); 
