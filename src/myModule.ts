@@ -31,8 +31,10 @@ const cardsData = getCardsData();
 
 // Create all cards
 function createCards() {
+  
 
     cardsData.forEach((data: any, index: any) => createCard(data, index));
+    
   }
 
 // Create a single card in DOM
@@ -82,7 +84,11 @@ function createCard(data: any, index: any) {
   // Get cards from local storage
   function getCardsData(): any {
 
-    const cards : any = localStorage.getItem('cards');
+
+
+    alert (localStorage.length);
+    const cards = JSON.parse(localStorage.getItem('cards'));
+alert(cards.length);
     return cards === null ? [] : cards;
   }
 
@@ -96,7 +102,7 @@ function createCard(data: any, index: any) {
 
   
   createCards();
-
+  
   // Event listeners
 
 // Next button
@@ -120,6 +126,7 @@ if(nextBtn) {
     }
   )}
 }
+
 nextButton();
   // Prev button
   function prevButton () {
@@ -139,16 +146,18 @@ nextButton();
   });
 }
 }
+
 prevButton();
+
   // Show add container
   function showAddContainer () {
   if(showBtn) {
     alert("Show");
-    showBtn.addEventListener('click', () => {
+    /*showBtn.addEventListener('click', () => {
       if(addContainer) 
         addContainer.classList.add('show');
         
-    });
+    });*/
   }
 }
 showAddContainer();
