@@ -26,7 +26,8 @@ let currentActiveCard = 0;
 
 const cardsEl: any = [];
 // Store card data
-const cardsData = getCardsData();
+const cardsData : Array<string> = getCardsData();
+
 
 
 // Create all cards
@@ -44,18 +45,17 @@ function createCard(data: any, index: any) {
   
     if (index === 0) 
       card.classList.add('active');
-    
-  
+
     card.innerHTML = `
     <div class="inner-card">
     <div class="inner-card-front">
       <p>
-        ${data.question}
+        ${data}
       </p>
     </div>
     <div class="inner-card-back">
       <p>
-        ${data.answer}
+        ${index}
       </p>
     </div>
   </div>
@@ -82,10 +82,9 @@ function createCard(data: any, index: any) {
   
   // Get cards from local storage
   function getCardsData(): any {
-    
+
     var tmpCards : string | null ;
     tmpCards = localStorage.getItem('cards');
-
 
     if (typeof tmpCards === 'string') { 
        var cards = JSON.parse(tmpCards); }
@@ -93,10 +92,15 @@ function createCard(data: any, index: any) {
     return cards === null ? [] : cards;
   }
 
+  // Get cards from local storage
+/*function getCardsData() {
+  const cards = JSON.parse(localStorage.getItem('cards'));
+  return cards === null ? [] : cards;
+}*/
+
   // Add card to local storage
   function setCardsData(cards: any):any {
-    
-    alert(cards);
+
         localStorage.setItem('cards', JSON.stringify(cards));
         window.location.reload();
       
@@ -109,29 +113,32 @@ function createCard(data: any, index: any) {
 
 // Next button
 
-function nextButton() {
-if(nextBtn) {
+
+  if(nextBtn) {
 
     nextBtn.addEventListener('click', () => 
     {
-        cardsEl[currentActiveCard].className = 'card left';
+       
+      cardsEl[currentActiveCard].className = 'card left';
 
         currentActiveCard = currentActiveCard + 1;
-  
+
         if (currentActiveCard > cardsEl.length - 1) {
             currentActiveCard = cardsEl.length - 1;
         }
     
         cardsEl[currentActiveCard].className = 'card active';
-  
+        
         updateCurrentText();
+
     }
   )}
-}
 
-nextButton();
+
+
+
   // Prev button
-  function prevButton () {
+
   if(prevBtn) {
   prevBtn.addEventListener('click', () => {
     cardsEl[currentActiveCard].className = 'card right';
@@ -147,97 +154,62 @@ nextButton();
     updateCurrentText();
   });
 }
-}
 
-prevButton();
 
   // Show add container
-  function showAddContainer () {
+
   if(showBtn) {
-    alert("Show");
+
     showBtn.addEventListener('click', () => {
       if(addContainer) 
         addContainer.classList.add('show');
         
     });
   }
-}
-showAddContainer();
+
   // Hide add container
-  function hideAddContainer () {
   if(hideBtn) {
   hideBtn.addEventListener('click', () => {
       if(addContainer)
         addContainer.classList.remove('show');
     });
   } 
-}
-hideAddContainer();
+
   
   // Add new card
-  function addNewCard () {
 
     if(addCardBtn) {
 
-    /*addCardBtn.addEventListener('click', () => {
-        if(questionEl){
-            const question = questionEl.value;
-        if(answerEl){
-            const answer = answerEl.value;}
-    
-        if(questionEl && answerEl) {
-
-
-            if (questionEl.trim() && answerEl.trim()) {
-  
-                createCard(questionEl, answerEl);
-        
-                if(questionEl) {
-                    questionEl.textContent = '';}
-                if(answerEl) {
-                    answerEl.textContent = '';}
-        
-                if(addContainer) {
-                    addContainer.classList.remove('show');}
-  
-                cardsData.push(questionEl, answerEl);
-                setCardsData(cardsData);
-            }*/
-            
-          // Add new card
       addCardBtn.addEventListener('click', () => {
 
 
-        const question = questionEl.value;
-        const answer = answerEl.value;
+        const question = (<HTMLInputElement>questionEl).value;
+        const answer = (<HTMLInputElement>answerEl).value;
 
-
-        alert(question);
-        alert(answer);
 
         if (question && answer) {
           if (question.trim() && answer.trim()) {
             const newCard = { question, answer };
 
-            createCard(question, answer);//newCard);
+            createCard(newCard.question, newCard.answer);
 
-          //questionEl.value = '';
-          //answerEl.value = '';
+            (<HTMLInputElement>questionEl).value = '';
+            (<HTMLInputElement>answerEl).value = '';
+
           if (addContainer)    
-          addContainer.classList.remove('show');
+            addContainer.classList.remove('show');
 
-          cardsData.push(newCard);
+          cardsData.concat(newCard.question, newCard.answer);
           setCardsData(cardsData);
         }
       }
       });
     }   
-    }
+    
   
-  addNewCard();
+
   // Clear cards button
-  
-function clearCards () {
+
   if(clearBtn){
     clearBtn.addEventListener('click', () => {
         if(localStorage){
@@ -247,5 +219,4 @@ function clearCards () {
         window.location.reload();
         });
     }
-  }
-clearCards(); 
+ 
