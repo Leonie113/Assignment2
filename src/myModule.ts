@@ -14,8 +14,8 @@ const nextBtn: HTMLElement | null= document.getElementById('next');
 const currentEl: HTMLElement | null= document.getElementById('current');
 const showBtn: HTMLElement | null = document.getElementById('show');
 const hideBtn: HTMLElement | null = document.getElementById('hide');
-const questionEl = document.getElementById('question');
-const answerEl = document.getElementById('answer');
+const questionEl: HTMLElement | null = document.getElementById('question');
+const answerEl: HTMLElement | null = document.getElementById('answer');
 const addCardBtn: HTMLElement | null= document.getElementById('add-card');
 const clearBtn: HTMLElement | null= document.getElementById('clear');
 const addContainer: HTMLElement | null= document.getElementById('add-container');
@@ -31,9 +31,8 @@ const cardsData = getCardsData();
 
 // Create all cards
 function createCards() {
-  
-
-    cardsData.forEach((data: any, index: any) => createCard(data, index));
+    if (cardsData != null)
+      cardsData.forEach((data: any, index: any) => createCard(data, index));
     
   }
 
@@ -83,18 +82,21 @@ function createCard(data: any, index: any) {
   
   // Get cards from local storage
   function getCardsData(): any {
+    
+    var tmpCards : string | null ;
+    tmpCards = localStorage.getItem('cards');
 
 
+    if (typeof tmpCards === 'string') { 
+       var cards = JSON.parse(tmpCards); }
 
-    alert (localStorage.length);
-    const cards = JSON.parse(localStorage.getItem('cards'));
-alert(cards.length);
     return cards === null ? [] : cards;
   }
 
   // Add card to local storage
   function setCardsData(cards: any):any {
     
+    alert(cards);
         localStorage.setItem('cards', JSON.stringify(cards));
         window.location.reload();
       
@@ -153,11 +155,11 @@ prevButton();
   function showAddContainer () {
   if(showBtn) {
     alert("Show");
-    /*showBtn.addEventListener('click', () => {
+    showBtn.addEventListener('click', () => {
       if(addContainer) 
         addContainer.classList.add('show');
         
-    });*/
+    });
   }
 }
 showAddContainer();
@@ -174,17 +176,19 @@ hideAddContainer();
   
   // Add new card
   function addNewCard () {
-  if(addCardBtn) {
-    addCardBtn.addEventListener('click', () => {
+
+    if(addCardBtn) {
+
+    /*addCardBtn.addEventListener('click', () => {
         if(questionEl){
-            const question = questionEl.textContent;}
+            const question = questionEl.value;
         if(answerEl){
-            const answer = answerEl.textContent;}
+            const answer = answerEl.value;}
     
         if(questionEl && answerEl) {
-            var a = 1;
-            if (a=1) {
-            //if (questionEl.trim() && answerEl.trim()) {
+
+
+            if (questionEl.trim() && answerEl.trim()) {
   
                 createCard(questionEl, answerEl);
         
@@ -198,10 +202,38 @@ hideAddContainer();
   
                 cardsData.push(questionEl, answerEl);
                 setCardsData(cardsData);
-            }
-        }});
+            }*/
+            
+          // Add new card
+      addCardBtn.addEventListener('click', () => {
+
+
+        const question = questionEl.value;
+        const answer = answerEl.value;
+
+
+        alert(question);
+        alert(answer);
+
+        if (question && answer) {
+          if (question.trim() && answer.trim()) {
+            const newCard = { question, answer };
+
+            createCard(question, answer);//newCard);
+
+          //questionEl.value = '';
+          //answerEl.value = '';
+          if (addContainer)    
+          addContainer.classList.remove('show');
+
+          cardsData.push(newCard);
+          setCardsData(cardsData);
+        }
+      }
+      });
+    }   
     }
-  }
+  
   addNewCard();
   // Clear cards button
   
