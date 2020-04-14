@@ -6,7 +6,7 @@ export class Ursprungscode extends HTMLElement{
     this.innerHTML = "<h1>Hello World</h1>";
   
     }
-}
+  }
 
 const cardsContainer: HTMLElement | null = document.getElementById('cards-container');
 const prevBtn: HTMLElement | null= document.getElementById('prev');
@@ -27,8 +27,6 @@ let currentActiveCard = 0;
 const cardsEl: any = [];
 // Store card data
 const cardsData : Array<string> = getCardsData();
-
-
 
 // Create all cards
 function createCards() {
@@ -115,10 +113,8 @@ function createCard(data: any, index: any) {
 
 
   if(nextBtn) {
-
     nextBtn.addEventListener('click', () => 
     {
-       
       cardsEl[currentActiveCard].className = 'card left';
 
         currentActiveCard = currentActiveCard + 1;
