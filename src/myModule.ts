@@ -26,7 +26,10 @@ let currentActiveCard = 0;
 
 const cardsEl: any = [];
 // Store card data
-const cardsData : Array<string> = getCardsData();
+//var cardsData : Array<string> = getCardsData();
+var cardsData = new Array<any>();
+cardsData = getCardsData();
+
 
 // Create all cards
 function createCards() {
@@ -84,9 +87,10 @@ function createCard(data: any, index: any) {
     var tmpCards : string | null ;
     tmpCards = localStorage.getItem('cards');
 
+    var cards = null;
     if (typeof tmpCards === 'string') { 
        var cards = JSON.parse(tmpCards); }
-
+       
     return cards === null ? [] : cards;
   }
 
@@ -179,15 +183,17 @@ function createCard(data: any, index: any) {
       addCardBtn.addEventListener('click', () => {
 
 
-        const question = (<HTMLInputElement>questionEl).value;
-        const answer = (<HTMLInputElement>answerEl).value;
+        const question : string = (<HTMLInputElement>questionEl).value;
+        const answer : string = (<HTMLInputElement>answerEl).value;
 
 
         if (question && answer) {
           if (question.trim() && answer.trim()) {
-            const newCard = { question, answer };
+            var newCard = new Array(2);
+            newCard[0] = question;
+            newCard[1] = answer;
 
-            createCard(newCard.question, newCard.answer);
+            createCard(question, answer);
 
             (<HTMLInputElement>questionEl).value = '';
             (<HTMLInputElement>answerEl).value = '';
@@ -195,8 +201,10 @@ function createCard(data: any, index: any) {
           if (addContainer)    
             addContainer.classList.remove('show');
 
-          cardsData.concat(newCard.question, newCard.answer);
-          setCardsData(cardsData);
+            //cardsData.concat("Frage", "Antwort");
+
+            cardsData.push(newCard);
+            setCardsData(newCard);
         }
       }
       });
