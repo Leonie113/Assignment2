@@ -8,6 +8,8 @@ export class Ursprungscode extends HTMLElement{
     }
   }
 
+
+  //Fremdcode in Typescript umgeschrieben
 const cardsContainer: HTMLElement | null = document.getElementById('cards-container');
 const prevBtn: HTMLElement | null= document.getElementById('prev');
 const nextBtn: HTMLElement | null= document.getElementById('next');
@@ -25,16 +27,19 @@ let currentActiveCard = 0;
 // Store DOM cards
 
 const cardsEl: any = [];
+
 // Store card data
-//var cardsData : Array<string> = getCardsData();
 var cardsData = new Array<any>();
 cardsData = getCardsData();
 
 
 // Create all cards
 function createCards() {
+
     if (cardsData != null)
+    {
       cardsData.forEach((data: any, index: any) => createCard(data, index));
+    }
     
   }
 
@@ -51,12 +56,12 @@ function createCard(data: any, index: any) {
     <div class="inner-card">
     <div class="inner-card-front">
       <p>
-        ${data}
+        ${data[0]}
       </p>
     </div>
     <div class="inner-card-back">
       <p>
-        ${index}
+        ${data[1]}
       </p>
     </div>
   </div>
@@ -84,7 +89,7 @@ function createCard(data: any, index: any) {
   // Get cards from local storage
   function getCardsData(): any {
 
-    var tmpCards : string | null ;
+    var tmpCards : any | null ;
     tmpCards = localStorage.getItem('cards');
 
     var cards = null;
@@ -93,12 +98,6 @@ function createCard(data: any, index: any) {
        
     return cards === null ? [] : cards;
   }
-
-  // Get cards from local storage
-/*function getCardsData() {
-  const cards = JSON.parse(localStorage.getItem('cards'));
-  return cards === null ? [] : cards;
-}*/
 
   // Add card to local storage
   function setCardsData(cards: any):any {
@@ -111,9 +110,9 @@ function createCard(data: any, index: any) {
   
   createCards();
   
-  // Event listeners
+// ___Event listeners___
 
-// Next button
+    // Next button
 
 
   if(nextBtn) {
@@ -182,18 +181,19 @@ function createCard(data: any, index: any) {
 
       addCardBtn.addEventListener('click', () => {
 
-
         const question : string = (<HTMLInputElement>questionEl).value;
         const answer : string = (<HTMLInputElement>answerEl).value;
 
 
         if (question && answer) {
           if (question.trim() && answer.trim()) {
-            var newCard = new Array(2);
+            var newCard = new Array;
             newCard[0] = question;
             newCard[1] = answer;
-
-            createCard(question, answer);
+            
+           
+            //createCard(newCard,0);
+            createCard(newCard,0);
 
             (<HTMLInputElement>questionEl).value = '';
             (<HTMLInputElement>answerEl).value = '';
@@ -201,10 +201,11 @@ function createCard(data: any, index: any) {
           if (addContainer)    
             addContainer.classList.remove('show');
 
-            //cardsData.concat("Frage", "Antwort");
+            //cardsData.concat(question, answer);
 
             cardsData.push(newCard);
-            setCardsData(newCard);
+            setCardsData(cardsData);
+            
         }
       }
       });
@@ -212,7 +213,7 @@ function createCard(data: any, index: any) {
     
   
 
-  // Clear cards button
+  // Clear cards buttons
 
   if(clearBtn){
     clearBtn.addEventListener('click', () => {
