@@ -188,3 +188,14 @@ h1 button {
   min-width: 500px;
   max-width: 100%;
 }
+
+.color {
+  position: absolute;
+  top: 30px;
+  left: 80px;
+  float: left;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  font-size: 14px;
+  
+}
