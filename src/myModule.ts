@@ -76,7 +76,7 @@ function createCard(data: any, index: any) {
       cardsContainer.appendChild(card);
   
     updateCurrentText();
-  }
+
   
 
 
@@ -97,8 +97,11 @@ function createCard(data: any, index: any) {
        var cards = JSON.parse(tmpCards); }
        
     return cards === null ? [] : cards;
+    
   }
+ 
 
+  
   // Add card to local storage
   function setCardsData(cards: any):any {
 
@@ -225,3 +228,16 @@ function createCard(data: any, index: any) {
         });
     }
  
+    // ___Eigencode___
+
+    //Switch Color Button
+    var color = ["#58D3F7", "#FF0000", "#01DF3A", "#FACC2E", "#F5A9BC"];
+    var i = 0;
+    document.querySelector("#color")!.addEventListener("click", function() {
+      i = i < color.length ? ++i : 0;
+    document.querySelector("body")!.style.background = color[i]
+    })
+
+    function changeColor() {
+      document.querySelector("body")!.style.background = color[i]
+    }
