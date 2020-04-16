@@ -237,7 +237,4 @@ function createCard(data: any, index: any) {
       i = i < color.length ? ++i : 0;
     document.querySelector("body")!.style.background = color[i]
     })
-
-    function changeColor() {
-      document.querySelector("body")!.style.background = color[i]
-    }
+  }
