@@ -1,0 +1,6 @@
+1. Add new Cards 
+2. Choose a background color
+3. Start the Study Music
+4. Start the Study Counter, to determine when you have to take a break 
+5. Delete the cards, when you no longer need them
+6. Doubleclick on the button to delete this button

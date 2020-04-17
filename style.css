@@ -231,3 +231,18 @@ h1 button {
   cursor: pointer;
 }
 
+#countdown {
+  display: inline-flex;
+  font-size: 20px;
+  top: 10px;
+}
+
+.timebox {
+  top: 10px;
+}
+.showtext {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  padding-left: 180px;
+}
