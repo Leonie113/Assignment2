@@ -1,3 +1,4 @@
+//__Eigencode__
 // Music Player
 var songs = ["A_brilliant_idea.mp3", "Morning_Mood.mp3", "A_beautiful_memory.mp3"];
 var songTitle = document.getElementById("song");

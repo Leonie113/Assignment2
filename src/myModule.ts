@@ -9,7 +9,9 @@ export class Ursprungscode extends HTMLElement{
   }
 
 
-  //Fremdcode in Typescript umgeschrieben
+/*___Fremdcode in Typescript umgeschrieben___ 
+https://github.com/bradtraversy/vanillawebprojects/tree/master/memory-cards */
+
 const cardsContainer: HTMLElement | null = document.getElementById('cards-container');
 const prevBtn: HTMLElement | null= document.getElementById('prev');
 const nextBtn: HTMLElement | null= document.getElementById('next');
